@@ -10,27 +10,64 @@ body{
 font-family:"Hiragino Mincho ProN",serif;
 text-align:center;
 background:#f8f4ec;
-margin-top:0px;
+margin-top:0;
 }
 
-h1{
-font-size:48px;
-color:#7a0000;
-}
-
+/* テキスト */
 p{
 font-size:40px;
-font-weight: bold;
+font-weight:bold;
 color:#333;
 }
 
+/* ベル */
 #bell{
 font-size:70px;
-margin-top:20px;
+margin-top:40px;
+}
+
+/* ベル揺れアニメ */
+@keyframes ring {
+0% { transform: rotate(0); }
+25% { transform: rotate(15deg); }
+50% { transform: rotate(-15deg); }
+75% { transform: rotate(10deg); }
+100% { transform: rotate(0); }
 }
 
 .ring{
-animation:ring 1s ease;
+animation:ring 0.8s ease;
+}
+
+/* ボタン（ここが追加ポイント🔥） */
+#callBtn{
+margin-top:40px;
+font-size:32px;
+padding:20px 40px;
+background:#7a0000;
+color:#fff;
+border:none;
+border-radius:12px;
+width:80%;
+max-width:300px;
+}
+
+/* 押した時 */
+#callBtn:active{
+transform:scale(0.95);
+}
+
+/* 無効状態 */
+.disabled{
+background:#aaa !important;
+}
+
+/* メッセージ */
+#message{
+margin-top:30px;
+font-size:28px;
+color:#7a0000;
+display:none;
 }
 
 </style>
@@ -41,7 +78,7 @@ animation:ring 1s ease;
 
 <div id="bell">🛎️</div>
 
-<p>If you need assistance, <br>please press the call button below. </p>
+<p>If you need assistance,<br>please press the call button below.</p>
 <p>ご用の際は下の呼び出しボタンを押してください。</p>
 
 <button id="callBtn" onclick="callStaff()">CALL STAFF</button>
@@ -71,7 +108,7 @@ bell.classList.add("ring");
 
 setTimeout(function(){
 bell.classList.remove("ring");
-},1000);
+},800);
 
 btn.classList.add("disabled");
 
@@ -88,13 +125,9 @@ content:"🛎【レジ呼び出し】お客様がレジにいます"
 document.getElementById("message").style.display="block";
 
 setTimeout(function(){
-
 cooldown=false;
-
 btn.classList.remove("disabled");
-
 document.getElementById("message").style.display="none";
-
 },30000);
 
 }

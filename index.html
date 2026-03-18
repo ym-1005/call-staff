@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:"Hiragino Mincho ProN",serif;
+text-align:center;
+background:#f8f4ec;
+margin-top:0px;
+}
+
+h1{
+font-size:48px;
+color:#7a0000;
+}
+
+p{
+font-size:40px;
+font-weight: bold;
+color:#333;
+}
+
+#bell{
+font-size:70px;
+margin-top:20px;
+}
+
+.ring{
+animation:ring 1s ease;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="bell">🛎️</div>
+
+<p>If you need assistance, <br>please press the call button below. </p>
+<p>ご用の際は下の呼び出しボタンを押してください。</p>
+
+<button id="callBtn" onclick="callStaff()">CALL STAFF</button>
+
+<div id="message">
+店員を呼びました<br>
+Staff has been notified
+</div>
+
+<script>
+
+let cooldown=false;
+
+function callStaff(){
+
+if(cooldown){
+alert("Please wait a moment");
+return;
+}
+
+cooldown=true;
+
+let bell=document.getElementById("bell");
+let btn=document.getElementById("callBtn");
+
+bell.classList.add("ring");
+
+setTimeout(function(){
+bell.classList.remove("ring");
+},1000);
+
+btn.classList.add("disabled");
+
+fetch("https://discord.com/api/webhooks/1483017172405194833/aXLaqohfPlHPZpj5xs4YuxZVDuAIFQFYqMJtFdbIVtQuuCqoCkEz_owdKN5PEPB3-0QD",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+content:"🛎【レジ呼び出し】お客様がレジにいます"
+})
+});
+
+document.getElementById("message").style.display="block";
+
+setTimeout(function(){
+
+cooldown=false;
+
+btn.classList.remove("disabled");
+
+document.getElementById("message").style.display="none";
+
+},30000);
+
+}
+
+</script>
+
+</body>
+</html>

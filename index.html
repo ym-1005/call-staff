@@ -41,20 +41,23 @@ animation:ring 0.8s ease;
 
 /* ボタン（ここが追加ポイント🔥） */
 #callBtn{
-margin-top:40px;
-font-size:32px;
-padding:20px 40px;
+margin-top:50px;
+font-size:40px;        /* 文字大きく */
+padding:30px 20px;    /* 上下めっちゃ広げる */
 background:#7a0000;
 color:#fff;
 border:none;
-border-radius:12px;
-width:80%;
-max-width:300px;
+border-radius:16px;
+width:90%;            /* 横幅広げる */
+max-width:400px;      /* 最大サイズUP */
+box-shadow: 0 6px 0 #4d0000;
 }
 
 /* 押した時 */
 #callBtn:active{
 transform:scale(0.95);
+transform: translateY(4px);
+box-shadow: 0 2px 0 #4d0000;
 }
 
 /* 無効状態 */
